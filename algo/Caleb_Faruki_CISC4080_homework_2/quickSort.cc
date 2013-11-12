@@ -31,20 +31,18 @@ int choosePivot(int a[], int lo, int hi) {
 }
 
 void partition(int a[], int lo, int hi, int& pivotIndex) {
-
     choosePivot(a, lo, hi);
 
     int pivot = a[lo];
-
     int lastS1 = lo;
     int firstUnknown = lo + 1;
 
     for(; firstUnknown <= hi; ++firstUnknown) {
-	if(a[firstUnknown] < pivot) {
-	    ++lastS1;
-	    if (firstUnknown != lastS1)
-		swap(a[firstUnknown], a[lastS1]);
-	}
+		if(a[firstUnknown] < pivot) {
+		    ++lastS1;
+		    if (firstUnknown != lastS1)
+				swap(a[firstUnknown], a[lastS1]);
+		}
     }
 
 //place pivot in proper position and mark its loc.
@@ -54,14 +52,12 @@ void partition(int a[], int lo, int hi, int& pivotIndex) {
 } // partition()
 
 void quickSort(int a[], int lo, int hi) {
-
     int pivotIndex;
 
     if(lo < hi) {
-	partition(a, lo, hi, pivotIndex);
-
-	quickSort(a, lo, pivotIndex-1);
-	quickSort(a, pivotIndex+1, hi);
+		partition(a, lo, hi, pivotIndex);
+		quickSort(a, lo, pivotIndex-1);
+		quickSort(a, pivotIndex+1, hi);
     }
 } // end quickSort()
 
@@ -80,32 +76,10 @@ bool isSorted(const int a[], int& size) {
 	}
 } // end isSorted()
 
-void printArray(int a[], int size) {
-	for(int i=0; i < size; i++)
-		cout << " " << a[i] << endl;
-} // end printArray()
-
-void avg(int a[], int size) { //avg-case sort
-	srand((unsigned)time(0));
-	for(int i=0; i < size; i++)
-		a[i] = rand()%10+1;
-} // end avg()
-
-void best(int a[], int size) { //best-case sort
-	int n = 0;
-	for(int i=0; i < size; i++) {
-		a[i] = n;
-		n++;
-	}
-} // end best()
-
-void worst(int a[], int size) { //worst-case sort
-	int m = size;
-	for(int i=0; i < size; i++) {
-		a[i] = m;
-		m--;
-	}
-} // end worst()
+void printArray(int a[], int size);
+void avg(int a[], int size);
+void best(int a[], int size);
+void worst(int a[], int size);
 
 int main() {
 	int size = 16384;
@@ -147,3 +121,30 @@ int main() {
 	cout << endl;
 	return 0;
 }
+
+void printArray(int a[], int size) {
+	for(int i=0; i < size; i++)
+		cout << " " << a[i] << endl;
+} // end printArray()
+
+void avg(int a[], int size) { //avg-case sort
+	srand((unsigned)time(0));
+	for(int i=0; i < size; i++)
+		a[i] = rand()%10+1;
+} // end avg()
+
+void best(int a[], int size) { //best-case sort
+	int n = 0;
+	for(int i=0; i < size; i++) {
+		a[i] = n;
+		n++;
+	}
+} // end best()
+
+void worst(int a[], int size) { //worst-case sort
+	int m = size;
+	for(int i=0; i < size; i++) {
+		a[i] = m;
+		m--;
+	}
+} // end worst()
