@@ -65,7 +65,7 @@ void quickSort(int a[], int lo, int hi) {
     }
 } // end quickSort()
 
-bool isSorted(int a[], int size) {
+bool isSorted(const int a[], int& size) {
 	for(int i=0; i < size-1; i++) {
 		if(a[i] > a[i+1]) {
 			cout << "Array is not sorted." << endl;
