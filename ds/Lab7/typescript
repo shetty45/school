@@ -1,0 +1,291 @@
+Script started on Fri 16 Aug 2013 08:51:21 PM EDT
+]0;faruki@ubuntu: ~/DataStructures/Lab7faruki@ubuntu:~/DataStructures/Lab7$ exitcat main.ccsort_algorithms.cc./a.out[Kg++ List.cc Node.cc Student.cc  main.cc[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[KM[Kmain.cc L[KMaze.cc
+]0;faruki@ubuntu: ~/DataStructures/Lab7faruki@ubuntu:~/DataStructures/Lab7$ cat main.cc
+/**********************************************************************
+* Name: Caleb Faruki
+* Lab7: Recursive Maze
+* Course: Data Structures
+* Date: August 16, 2013
+* File: Main Function
+ *********************************************************************/
+#include "Maze.h"
+
+int main() {
+
+    Maze maze; // instantiate object of class Maze.
+
+    int x, y; // args for startPoint() and exitR()
+
+    cout << endl;
+    cout << "Initial Maze display:" << endl;
+    maze.print(); // print default maze.
+
+    cout << "Enter starting coords (x,y) from (0,0) to (3,4): " << endl;
+    cout << endl;
+    cout << "Coord x = ";
+    cin >> x;
+    cout << "Coord y = ";
+    cin >> y;
+    cout << "Starting coords : (x=" << x << ",y=" << y << ")\n" << endl;
+
+    cout << "'S' = starting point, 'E' = exit" << endl;
+
+    maze.startPoint(x,y); // validates and inserts 'S' value into element.
+    maze.print(); // reprint maze with newly inserted 'S' element.
+
+    cout << "Final Maze display:\n" << endl;
+    if(maze.exitR(x,y)) { // takes original x,y to initiate recursion.
+        maze.print(); // reprint maze, showing all marked elements visited.
+        cout << "\nYou escaped!\n" << endl;
+    } else {
+        maze.print();
+        cout << "\nThere was no exit from the starting point.\n" << endl;
+    }
+
+	return 0;
+}]0;faruki@ubuntu: ~/DataStructures/Lab7faruki@ubuntu:~/DataStructures/Lab7$ cat Maze.h
+/**********************************************************************
+* Name: Caleb Faruki
+* Lab7: Recursive Maze
+* Course: Data Structures
+* Date: August 16, 2013
+* File: Maze Class
+ *********************************************************************/
+#ifndef MAZE_H
+#define MAZE_H
+
+#include <iostream>
+
+using namespace std;
+
+static int count; //global variable that counts # of steps.
+
+class Maze {
+
+public:
+    Maze(); // constructor
+
+    void startPoint(int, int); // start point for user, x,y coordinates
+    bool exitR(int, int); // recursive to backtracks to prev position
+                          // when non-'O' position is encountered.
+    void print(); // print function.
+
+private:
+    static const int rows = 4; // total rows in Maze.
+    static const int cols = 5; // total columns in Maze.
+    char array[rows] [cols];  // 2D char array represents the Maze.
+
+    bool validMove(int,int);
+
+    bool start; //start point is valid: yes or no?
+    bool path; //path to exit exists: yes or no?
+};
+#endif]0;faruki@ubuntu: ~/DataStructures/Lab7faruki@ubuntu:~/DataStructures/Lab7$ cat Maze.cc
+/**********************************************************************
+* Name: Caleb Faruki
+* Lab7: Recursive Maze
+* Course: Data Structures
+* Date: August 16, 2013
+* File: Maze Implementation
+ *********************************************************************/
+#include "Maze.h"
+
+Maze:: Maze(){
+// 'O' open position, 'X' blocked position, 'E' exit
+// Pre-fixed 2D matrix.
+    array[0][0] = 'O';
+    array[0][1] = 'O';
+    array[0][4] = 'O';
+    array[1][0] = 'O';
+    array[1][2] = 'O';
+    array[1][3] = 'O';
+    array[2][0] = 'O';
+    array[2][1] = 'O';
+    array[2][2] = 'O';
+    array[2][3] = 'O';
+    array[3][2] = 'O';
+    array[0][2] = 'X';
+    array[1][1] = 'X';
+    array[1][4] = 'X';
+    array[2][4] = 'X';
+    array[3][0] = 'X';
+    array[3][1] = 'X';
+    array[3][3] = 'X';
+    array[3][4] = 'X';
+    array[0][3] = 'E';
+} //maze constructor, which initializes the maze
+
+void Maze::startPoint(int x, int y) {
+    if (validMove(x,y))
+        array[rows-(y+1)][x] = 'S'; // 'S' indicates startPoint.
+    else
+        cerr << "Bad start point" << endl;
+} // end startPoint()
+
+//false = no exit, true = exit
+bool Maze::exitR(int x, int y){
+    if (!validMove(x,y))
+        return path = false;
+    count++; //increment # of moves.
+
+    if( array[y][x] == 'E' ) { // base case.
+        count++;
+        cout << "You marked " << count << " cells en route to 'E'.\n" << endl;
+        return path = true;
+    } // recursion.
+    else if (array[y][x] != 'E') { // look to adjacent elements for 'O' value.
+        //don't overwrite 'E'or'S'
+        if (array[rows-(y+1)][x] != 'E' && array[rows-(y+1)][x] != 'S')
+            array[rows-(y+1)][x] = 'M'; //mark visited element.
+
+        count++;
+        //1st, try left.
+        if(array[rows-(y+1)][x-1]=='O'||array[rows-(y+1)][x-1]=='E') {
+            exitR(x-1,y);
+            count++;
+        } //2nd, try right.
+        if(array[rows-(y+1)][x+1]=='O'||array[rows-(y+1)][x-1]=='E') {
+            exitR(x+1,y);
+            count++;
+        } //3rd, try down.
+        if(array[rows-y][x]=='O'||array[rows-(y+1)][x-1]=='E') {
+            exitR(x,y-1); 
+            count++;
+        } //last, try up.
+        if(array[rows-(y+2)][x]=='O'||array[rows-(y+1)][x-1]=='E') {
+            exitR(x,y+1); 
+            count++;
+        } //out of options
+    } // end if/elseif
+    return path; //if points are not valid then return false
+} // end exitR()
+
+void Maze::print() {
+    int rCount = rows-1;
+
+    for (int i = 0; i < rows; i++){
+        cout << "   +---+---+---+---+---+" << endl;
+
+        cout << " " << rCount; // print y axis
+        for (int j = 0; j < cols; j++){
+            cout << " | " << array[i][j];
+            if ((j+1) % 5 == 0)
+                cout << " | " << endl;
+        } // end for
+        rCount--;
+    } // end for
+    cout << "   ---------------------\n" << "    ";
+    for(int i=0; i<cols; i++) 
+        cout << " " << i << "  "; // print x axis
+    cout << endl << endl;
+} // end print()
+
+bool Maze::validMove(int x, int y) {
+    if (x >= 0 || y >= 0 || x < cols || y < rows || array[y][x] == 'O'
+        || array[y][x] == 'S' || array[y][x] == 'E')
+        return true;
+    else 
+        return false;
+} // end validMove()]0;faruki@ubuntu: ~/DataStructures/Lab7faruki@ubuntu:~/DataStructures/Lab7$ ./a.out
+
+Initial Maze display:
+   +---+---+---+---+---+
+ 3 | O | O | X | E | O | 
+   +---+---+---+---+---+
+ 2 | O | X | O | O | X | 
+   +---+---+---+---+---+
+ 1 | O | O | O | O | X | 
+   +---+---+---+---+---+
+ 0 | X | X | O | X | X | 
+   ---------------------
+     0   1   2   3   4  
+
+Enter starting coords (x,y) from (0,0) to (3,4): 
+
+Coord x = 1
+Coord y = 3
+Starting coords : (x=1,y=3)
+
+'S' = starting point, 'E' = exit
+   +---+---+---+---+---+
+ 3 | O | S | X | E | O | 
+   +---+---+---+---+---+
+ 2 | O | X | O | O | X | 
+   +---+---+---+---+---+
+ 1 | O | O | O | O | X | 
+   +---+---+---+---+---+
+ 0 | X | X | O | X | X | 
+   ---------------------
+     0   1   2   3   4  
+
+Final Maze display:
+
+You marked 12 cells en route to 'E'.
+
+   +---+---+---+---+---+
+ 3 | M | S | X | E | M | 
+   +---+---+---+---+---+
+ 2 | M | X | M | M | M | 
+   +---+---+---+---+---+
+ 1 | M | M | M | M | X | 
+   +---+---+---+---+---+
+ 0 | X | X | M | X | X | 
+   ---------------------
+     0   1   2   3   4  
+
+
+You escaped!
+
+]0;faruki@ubuntu: ~/DataStructures/Lab7faruki@ubuntu:~/DataStructures/Lab7$ ./a.out
+
+Initial Maze display:
+   +---+---+---+---+---+
+ 3 | O | O | X | E | O | 
+   +---+---+---+---+---+
+ 2 | O | X | O | O | X | 
+   +---+---+---+---+---+
+ 1 | O | O | O | O | X | 
+   +---+---+---+---+---+
+ 0 | X | X | O | X | X | 
+   ---------------------
+     0   1   2   3   4  
+
+Enter starting coords (x,y) from (0,0) to (3,4): 
+
+Coord x = 4
+Coord y = 3
+Starting coords : (x=4,y=3)
+
+'S' = starting point, 'E' = exit
+   +---+---+---+---+---+
+ 3 | O | O | X | E | S | 
+   +---+---+---+---+---+
+ 2 | O | X | O | O | X | 
+   +---+---+---+---+---+
+ 1 | O | O | O | O | X | 
+   +---+---+---+---+---+
+ 0 | X | X | O | X | X | 
+   ---------------------
+     0   1   2   3   4  
+
+Final Maze display:
+
+   +---+---+---+---+---+
+ 3 | M | M | X | E | S | 
+   +---+---+---+---+---+
+ 2 | M | X | M | M | M | 
+   +---+---+---+---+---+
+ 1 | M | M | M | M | X | 
+   +---+---+---+---+---+
+ 0 | X | X | M | X | X | 
+   ---------------------
+     0   1   2   3   4  
+
+
+There was no exit from the starting point.
+
+]0;faruki@ubuntu: ~/DataStructures/Lab7faruki@ubuntu:~/DataStructures/Lab7$ exit
+exit
+
+Script done on Fri 16 Aug 2013 08:52:24 PM EDT

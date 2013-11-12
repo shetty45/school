@@ -1,0 +1,432 @@
+Script started on Wed 17 Jul 2013 02:11:44 PM EDT
+]0;faruki@ubuntu: ~/DataStructures/Lab4faruki@ubuntu:~/DataStructures/Lab4$ cat Student.h
+/**********************************************************************
+* Name: Caleb Faruki
+* Lab4: Basic Linked List
+* Course: Data Structures
+* Date: July 10, 2013
+* File: Student Class
+**********************************************************************/
+
+#ifndef STUDENT_H
+#define STUDENT_H
+
+#include <iostream>
+
+using namespace std;
+
+class Student {
+
+public:
+	Student(); //Default constructor;
+	Student(const string &, const string &, const string &, 
+		const string &, const string &); //New constructor.
+
+	//setters
+	void setStudent(const string &, const string &, const string &, 
+		const string &, const string &);
+	void setName(const string &, const string &, const string &);
+	void setSocial(const string &);
+	void setAge(const string &);
+
+	//getters
+	string getFirst();
+	string getMiddle();
+	string getLast();
+	string getSocial();
+	string getAge();
+
+private:
+	string stuData[5]; //array of fields for Student data.
+};
+
+#endif]0;faruki@ubuntu: ~/DataStructures/Lab4faruki@ubuntu:~/DataStructures/Lab4$ cat Student.cc
+/**********************************************************************
+* Name: Caleb Faruki
+* Lab4: Basic Linked List
+* Course: Data Structures
+* Date: July 10, 2013
+* File: Student Class Implementation
+**********************************************************************/
+
+#include "Student.h"
+
+using namespace std;
+
+
+Student::Student() {
+	stuData[0] = "Firstname";
+	stuData[1] = "Middlename";
+	stuData[2] = "Lastname";
+	stuData[3] = "SSN";
+	stuData[4] = "##";
+}
+
+Student::Student(const string & first, const string & mid, 
+	const string & last, const string & ssn, const string & age) {
+
+	setName(first, mid, last);
+	setSocial(ssn);
+	setAge(age);
+}
+
+void Student::setName(const string & first, const string & mid, 
+	const string & last) {
+
+	stuData[0] = first;
+	stuData[1] = mid;
+	stuData[2] = last;
+}
+
+void Student::setSocial(const string & ssn) {
+	stuData[3] = ssn;
+}
+
+void Student::setAge(const string & age) {
+	stuData[4] = age;
+}
+
+string Student::getFirst() { return stuData[0]; }
+
+string Student::getMiddle() { return stuData[1]; }
+
+string Student::getLast() { return stuData[2]; }
+
+string Student::getSocial() { return stuData[3]; }
+
+string Student::getAge() { return stuData[4]; }]0;faruki@ubuntu: ~/DataStructures/Lab4faruki@ubuntu:~/DataStructures/Lab4$ cat Node.h
+/**********************************************************************
+* Name: Caleb Faruki
+* Lab4: Basic Linked List
+* Course: Data Structures
+* Date: July 10, 2013
+* File: Node Class
+**********************************************************************/
+
+/*=============================NODE===================================*
+ |			  DATA 				|				NEXT 				  |
+ |====================================================================*
+*/
+#ifndef NODE_H
+#define NODE_H
+
+#include "Student.h"
+#include <iostream>
+
+using namespace std;
+
+class Node {
+
+public:
+	Node(); //Default constructor.
+	Node(Student *); //New constructor.
+
+	Student * getData(); //get data on Student object.
+	void setData(Student *); //set data for Student object.
+
+	Node * getNext();	//get the next Node in the linked list.
+	void setNext(Node * );	//set the next Node in the list.
+
+private:
+	Student * data; //pointer to current Student data.
+	Node * next; //pointer within Node to the next Node.
+
+};
+
+#endif]0;faruki@ubuntu: ~/DataStructures/Lab4faruki@ubuntu:~/DataStructures/Lab4$ cat Node.cc
+/**********************************************************************
+* Name: Caleb Faruki
+* Lab4: Basic Linked List
+* Course: Data Structures
+* Date: July 10, 2013
+* File: Node Class Implementation
+**********************************************************************/
+
+#include "Node.h"
+
+using namespace std;
+
+Node::Node() {
+	next = NULL; //new Nodes go to the end of the list.
+}
+
+Node::Node(Student * tempData) {
+	data = tempData;
+	next = NULL;
+}
+
+Student * Node::getData() { return data; }
+
+void Node::setData(Student * tempData) {
+	data = tempData;
+}
+
+Node * Node::getNext() { return next; }
+
+void Node::setNext(Node * nextNode) {
+	next = nextNode;
+}]0;faruki@ubuntu: ~/DataStructures/Lab4faruki@ubuntu:~/DataStructures/Lab4$ cat main.cc
+/**********************************************************************
+* Name: Caleb Faruki
+* Lab4: Basic Linked List
+* Course: Data Structures
+* Date: July 10, 2013
+* File: Driver File
+**********************************************************************/
+
+#include "Node.h"
+#include "Student.h"
+
+using namespace std;
+
+void append (Node **, Node *); //append Node to end of list.
+void display(Node *); //print linked list.
+void input(Student *); //enter new Student object.
+void deletes(Node **, string); //delete specific Node.
+
+string first;
+string mid;
+string last;
+string ssn;
+string age;
+
+int main() {
+
+	string flag; //flag checks for delimiter.
+	string name;
+	string stuDelete; //name to be deleted.
+
+	Student * stuPtr = NULL;
+	Node * head = NULL;
+	Node * newPtr = NULL;
+
+	do {
+		stuPtr = new Student;
+		input(stuPtr);
+		flag = stuPtr->getFirst(); //flag = first name.
+
+		if(stuPtr->getFirst() == "-") { //"-" is delimiter.
+			delete stuPtr; //no new Student, no need for pointer.
+			stuPtr = NULL;
+		}
+		else {
+			newPtr = new Node(stuPtr);
+			append(& head, newPtr);
+		}
+	} while (first != "-"); //prompts for more entries until
+						   //delimiter is detected.
+	display(head);
+
+	if(head)
+		cout << "Enter a Student to be deleted" << endl;
+	while(head) {
+		cout << "Last name: ";
+		cin >> stuDelete;
+		deletes(& head, stuDelete);
+
+		string reqDelete; //asks if you want to keep deleting.
+		cout << "Student has been deleted. Delete another? (Y/N): ";
+		cin >> reqDelete;
+
+		if((head) && (reqDelete == "Y")) {
+			display(head); //iterates thru linked list.
+			cout << "\nEnter another name to be deleted: \n" << endl;
+		}
+		else if(reqDelete != "Y") {
+			cout << "Deletion complete.\n" << endl;
+			break;
+		}
+	}
+
+	if(head) {
+		cout << "Here are the remaining Students in the list:" << endl;
+		display(head);
+	}
+	else
+	cout << "The list is now empty.\n"
+		 << "=============================" << endl;
+
+		 return 0;
+}
+
+void append(Node ** head, Node * newPtr) {
+	
+	Node * curr = * head;
+
+	if (curr) {
+		while (curr->getNext() != NULL)
+			curr = curr->getNext();
+		curr->setNext(newPtr);
+	}
+	else
+		* head = newPtr;
+}
+
+void display(Node * newPtr) {
+
+    Node * curr = newPtr; 
+
+    while(curr) {
+	// getData is used to point to the stud info in a node
+	cout << "{" 
+	     << curr->getData()->getFirst() << ", "
+	     << curr->getData()->getMiddle() << ", "
+	     << curr->getData()->getLast()<< ", "
+	     << curr->getData()->getSocial()<< ", "
+	     << curr->getData()->getAge()
+	     << "}" << endl;	
+
+	curr = curr->getNext(); // move to the next obj, traverse stud data
+    }
+
+    cout << "-----------------------------------------" << endl;
+}
+
+/*	if(!newPtr) //No students.
+		cout << "No Students in list." << endl;
+	else if (newPtr -> getNext() == NULL) { //Only 1 Student.
+		cout << "{"
+	    	 << newPtr -> getData() -> getFirst() << ", "
+	    	 << newPtr -> getData() -> getMiddle() << ", "
+	    	 << newPtr -> getData() -> getLast() << ", "
+	    	 << newPtr -> getData() -> getSocial() << ", "
+	    	 << newPtr -> getData() -> getAge()
+	    	 << "}" << endl;	
+	}
+	else {
+		cout << "{"
+	    	 << newPtr -> getData() -> getFirst() << ", "
+	    	 << newPtr -> getData() -> getMiddle() << ", "
+	    	 << newPtr -> getData() -> getLast() << ", "
+	    	 << newPtr -> getData() -> getSocial() << ", "
+	    	 << newPtr -> getData() -> getAge()
+	    	 << "}" << endl;	
+
+	    	 newPtr = newPtr -> getNext();
+
+	    	 cout << "..." << endl;
+	}
+}*/
+
+void input(Student * stuPtr) {
+
+	cout << "\nEnter Student information (Enter '-' to exit)\n"
+		 << "First Name: ";
+	cin >> first;
+
+	if(first == "-") {
+		stuPtr->setName(first, mid, last);
+		cout << "Student entry finished.\n" << endl;
+	}
+	else {
+		cout << "Middle Name: ";
+		cin >> mid;
+
+		cout << "Last Name: ";
+		cin >> last;
+
+		stuPtr->setName(first, mid, last);
+
+		cout << "Social: ";
+		cin >> ssn;
+		stuPtr->setSocial(ssn);
+
+		cout << "Age: ";
+		cin >> age;
+		stuPtr->setAge(age);
+	}
+	cout << "==============================" << endl;
+}
+
+void deletes(Node ** head, string stuDelete) {
+
+	Node * curr = * head;
+	Node * prev = NULL;
+
+	if(!curr)
+		cout << "No Students in list" << endl;
+	else {
+		while(curr) {
+			if(curr->getData()->getLast() == stuDelete) {
+				cout << "\n==============================\n"
+					 << "The following student is pointed to:\n"
+					 << "{" 
+	    			 << curr->getData()->getFirst() << ", "
+	    			 << curr->getData()->getMiddle() << ", "
+	    			 << curr->getData()->getLast()<< ", "
+	    			 << curr->getData()->getSocial()<< ", "
+	    			 << curr->getData()->getAge()
+	    			 << "}" << endl;	
+			break; //break if name to be deleted is found.
+			}
+			else {
+				prev = curr;
+				curr = curr->getNext(); //traverse list.
+			}
+		}
+		if (!prev) { //if at head of list.
+			* head = curr->getNext(); //point to next Node.
+			curr -> setNext(NULL);
+			delete curr; //delete this Node.
+			curr = NULL;
+		}
+		else {
+			prev -> setNext(curr->getNext());
+			curr -> setNext(NULL);
+			delete curr;
+			curr = NULL;
+		}
+	}
+}]0;faruki@ubuntu: ~/DataStructures/Lab4faruki@ubuntu:~/DataStructures/Lab4$ cat main.ccNode.cc[1PhStudent.cc[1Phexit[Kcat main.ccStudent.cc[1Ph[2PNode.cc[1Ph[3P./a.outg++ main.cc Student.cc Node.cc
+]0;faruki@ubuntu: ~/DataStructures/Lab4faruki@ubuntu:~/DataStructures/Lab4$ g++ main.cc Student.cc Node.cc[19Pcat main.ccNode.cc[1PhStudent.cc[1Phexit[Kcat main.ccStudent.cc[1Ph[2PNode.cc[1Ph[3P./a.outg++ main.cc Student.cc Node.cc./a.out[K
+
+Enter Student information (Enter '-' to exit)
+First Name: caleb
+Middle Name: mekal
+Last Name: faruki
+Social: 5432637
+Age: 22
+==============================
+
+Enter Student information (Enter '-' to exit)
+First Name: jesus  
+Middle Name: h
+Last Name: christ
+Social: 54326743
+Age: 22
+==============================
+
+Enter Student information (Enter '-' to exit)
+First Name: george
+Middle Name: w
+Last Name: bush
+Social: 543265463
+Age: 22
+==============================
+
+Enter Student information (Enter '-' to exit)
+First Name: -
+Student entry finished.
+
+==============================
+{caleb, mekal, faruki, 5432637, 22}
+{jesus, h, christ, 54326743, 22}
+{george, w, bush, 543265463, 22}
+-----------------------------------------
+Enter a Student to be deleted
+Last name: bush    christ
+
+==============================
+The following student is pointed to:
+{jesus, h, christ, 54326743, 22}
+Student has been deleted. Delete another? (Y/N): n
+Deletion complete.
+
+Here are the remaining Students in the list:
+{caleb, mekal, faruki, 5432637, 22}
+{george, w, bush, 543265463, 22}
+-----------------------------------------
+]0;faruki@ubuntu: ~/DataStructures/Lab4faruki@ubuntu:~/DataStructures/Lab4$ exit
+exit
+
+Script done on Wed 17 Jul 2013 02:13:15 PM EDT

@@ -1,0 +1,215 @@
+Script started on Fri 16 Aug 2013 03:21:37 PM EDT
+]0;faruki@ubuntu: ~/DataStructures/Lab6faruki@ubuntu:~/DataStructures/Lab6$ exitcat Student.cc[1Ph[2PNode.cc[1PhList.cc[1Ph[3P./a.outg++ List.cc Node.cc Student.cc  main.cc
+]0;faruki@ubuntu: ~/DataStructures/Lab6faruki@ubuntu:~/DataStructures/Lab6$ ./a.out
+List is empty. Inserting first Node.
+
+
+***********aList****************
+{Adah, G, Pinales, XXX-XX-XXXX, 20}
+{Cole, D, Yeltsin, XXX-XX-XXXX, 20}
+{Ernesto, E, Lytton, XXX-XX-XXXX, 20}
+{Loyce, F, Lair, XXX-XX-XXXX, 20}
+{Kandy, H, Keck, XXX-XX-XXXX, 20}
+{Dorla, R, Lanser, XXX-XX-XXXX, 20}
+{Mckenzie, I, Klein, XXX-XX-XXXX, 20}
+{Alex, T, Germain, XXX-XX-XXXX, 20}
+{Wanita, J, Galaway, XXX-XX-XXXX, 20}
+{Keith, K, Avina, XXX-XX-XXXX, 20}
+{Chloe, B, Caulkins, XXX-XX-XXXX, 20}
+{Odie, C, Gilreath, XXX-XX-XXXX, 20}
+{Johnny, S, Hires, XXX-XX-XXXX, 20}
+{Britni, L, McDuff, XXX-XX-XXXX, 20}
+{Isiah, Q, Truett, XXX-XX-XXXX, 20}
+{Renea, M, Willits, XXX-XX-XXXX, 20}
+{Lorrie, N, Buhr, XXX-XX-XXXX, 20}
+{Mitsue, O, Hundley, XXX-XX-XXXX, 20}
+{Zack, P, Axtell, XXX-XX-XXXX, 20}
+{Trevor, A, Nutting, XXX-XX-XXXX, 20}
+
+Copy from head to tail? (y/n): n
+Copying in reverse order...
+
+Done copying!
+
+******bList after copying*******
+{Trevor, A, Nutting, XXX-XX-XXXX, 20}
+{Zack, P, Axtell, XXX-XX-XXXX, 20}
+{Mitsue, O, Hundley, XXX-XX-XXXX, 20}
+{Lorrie, N, Buhr, XXX-XX-XXXX, 20}
+{Renea, M, Willits, XXX-XX-XXXX, 20}
+{Isiah, Q, Truett, XXX-XX-XXXX, 20}
+{Britni, L, McDuff, XXX-XX-XXXX, 20}
+{Johnny, S, Hires, XXX-XX-XXXX, 20}
+{Odie, C, Gilreath, XXX-XX-XXXX, 20}
+{Chloe, B, Caulkins, XXX-XX-XXXX, 20}
+{Keith, K, Avina, XXX-XX-XXXX, 20}
+{Wanita, J, Galaway, XXX-XX-XXXX, 20}
+{Alex, T, Germain, XXX-XX-XXXX, 20}
+{Mckenzie, I, Klein, XXX-XX-XXXX, 20}
+{Dorla, R, Lanser, XXX-XX-XXXX, 20}
+{Kandy, H, Keck, XXX-XX-XXXX, 20}
+{Loyce, F, Lair, XXX-XX-XXXX, 20}
+{Ernesto, E, Lytton, XXX-XX-XXXX, 20}
+{Cole, D, Yeltsin, XXX-XX-XXXX, 20}
+{Adah, G, Pinales, XXX-XX-XXXX, 20}
+
+*****bList after bubbleSort*****
+{Trevor, A, Nutting, XXX-XX-XXXX, 20}
+{Chloe, B, Caulkins, XXX-XX-XXXX, 20}
+{Odie, C, Gilreath, XXX-XX-XXXX, 20}
+{Cole, D, Yeltsin, XXX-XX-XXXX, 20}
+{Ernesto, E, Lytton, XXX-XX-XXXX, 20}
+{Loyce, F, Lair, XXX-XX-XXXX, 20}
+{Adah, G, Pinales, XXX-XX-XXXX, 20}
+{Kandy, H, Keck, XXX-XX-XXXX, 20}
+{Mckenzie, I, Klein, XXX-XX-XXXX, 20}
+{Wanita, J, Galaway, XXX-XX-XXXX, 20}
+{Keith, K, Avina, XXX-XX-XXXX, 20}
+{Britni, L, McDuff, XXX-XX-XXXX, 20}
+{Renea, M, Willits, XXX-XX-XXXX, 20}
+{Lorrie, N, Buhr, XXX-XX-XXXX, 20}
+{Mitsue, O, Hundley, XXX-XX-XXXX, 20}
+{Zack, P, Axtell, XXX-XX-XXXX, 20}
+{Isiah, Q, Truett, XXX-XX-XXXX, 20}
+{Dorla, R, Lanser, XXX-XX-XXXX, 20}
+{Johnny, S, Hires, XXX-XX-XXXX, 20}
+{Alex, T, Germain, XXX-XX-XXXX, 20}
+
+*****bList after selectSort*****
+{Alex, T, Germain, XXX-XX-XXXX, 20}
+{Johnny, S, Hires, XXX-XX-XXXX, 20}
+{Dorla, R, Lanser, XXX-XX-XXXX, 20}
+{Isiah, Q, Truett, XXX-XX-XXXX, 20}
+{Zack, P, Axtell, XXX-XX-XXXX, 20}
+{Mitsue, O, Hundley, XXX-XX-XXXX, 20}
+{Lorrie, N, Buhr, XXX-XX-XXXX, 20}
+{Renea, M, Willits, XXX-XX-XXXX, 20}
+{Britni, L, McDuff, XXX-XX-XXXX, 20}
+{Keith, K, Avina, XXX-XX-XXXX, 20}
+{Wanita, J, Galaway, XXX-XX-XXXX, 20}
+{Mckenzie, I, Klein, XXX-XX-XXXX, 20}
+{Kandy, H, Keck, XXX-XX-XXXX, 20}
+{Adah, G, Pinales, XXX-XX-XXXX, 20}
+{Loyce, F, Lair, XXX-XX-XXXX, 20}
+{Ernesto, E, Lytton, XXX-XX-XXXX, 20}
+{Cole, D, Yeltsin, XXX-XX-XXXX, 20}
+{Odie, C, Gilreath, XXX-XX-XXXX, 20}
+{Chloe, B, Caulkins, XXX-XX-XXXX, 20}
+{Trevor, A, Nutting, XXX-XX-XXXX, 20}
+
+Destruction complete.
+Destruction complete.
+]0;faruki@ubuntu: ~/DataStructures/Lab6faruki@ubuntu:~/DataStructures/Lab6$ cat main.cc[K[K[K[K[K[K[Ksorting[K[K[K[Kt_algorithms.cc
+/**********************************************************************
+* Name: Caleb Faruki
+* Lab6: Linked List III
+* Course: Data Structures
+* Date: August 16, 2013
+* File: Sorting Algorithms
+**********************************************************************/
+
+void List::file() {
+    string item;
+    const int size = 20; // 20 total students in file
+    ifstream file("students.txt"); // Open student.txt
+
+    for(int i = 0; i < size; i++) { // Iterates thru List of students.
+        string temp[5]; // Each loop creates a temp array.
+        for(int j = 0; j < 5; j++) { // Iterates thru array elements.
+            file >> item; // Extracts strings from file stream.
+            temp[j] = item; // and input them into temporary stuData arrays.
+        } // end for
+        Student *stuPtr = new Student; // each student gets a ptr.
+        input(stuPtr,temp[0],temp[1],temp[2],temp[3],temp[4]); // input temp data.
+        Node *nodePtr = new Node(stuPtr); // Node created for each Student.
+        append(stuPtr); // append Student to List.
+    } // end for
+    file.close(); // Close student.txt
+    cout << endl;
+} // end file()
+
+//Sort list by Middle Initial (each Student gets a letter from the alphabet)
+void List::bubbleSort() {
+    bool sorted = false; // Assume List is unsorted.
+
+    for (int pass = 1; (pass <= numNodes) && !sorted; ++pass) { //Never exceed numNodes.
+        for(Node *curr=head; curr!=tail; curr=curr->getNext()) { //Traverse list.
+
+            if(curr->getData()->getMid() > curr->getNext()->getData()->getMid()) {
+                swap(curr, curr->getNext()); // compare curr and next Nodes, swap.
+                sorted = false; //must check at least 1 more time to validate sorting.
+            } // end if
+        } // end for
+    } // end for
+    sorted = true;
+} // end bubbleSort()
+
+//Sort list by Middle Initial opposite order.
+void List::selectSort() {
+    bool sorted = false; // Assume List is unsorted.
+    Node *base = tail; // Start from end of list.
+
+    for(int pass=1; (pass<=numNodes)&&!sorted; ++pass) { //Never exceed numNodes.
+        for(Node *curr=tail; curr!=head; curr=curr->getPrev()){ //Traverse list reverse.
+            
+            if(curr->getData()->getMid() > base->getData()->getMid()) {
+                swap(curr, base); //check base against each Node in list, swap if necessary.
+                sorted = false; //must make 1 more pass at least.
+            } // end if
+        } // end for
+        base = base->getPrev(); //after traversal, move the base by 1.
+    } // end for
+    sorted = true;
+} // end selectSort()
+
+void List::swap(Node *curr, Node *next) {
+    Student *temp = curr->getData(); // Save curr Node data elsewhere.
+    //swap 
+    curr->setData(next->getData()); // Currs data equal to nexts data.
+    next->setData(temp); // Put original curr data into next pointer.
+} // end swap()]0;faruki@ubuntu: ~/DataStructures/Lab6faruki@ubuntu:~/DataStructures/Lab6$ cat main.cc
+/**********************************************************************
+* Name: Caleb Faruki
+* Lab6: Linked List III
+* Course: Data Structures
+* Date: August 16, 2013
+* File: Main Function
+**********************************************************************/
+#include "List.h"
+
+using namespace std;
+
+int main() {
+    List aList;
+
+    aList.file(); // read in students.txt.
+    cout << "***********aList****************" << endl;
+    aList.display();
+
+    List bList(aList); // copy contents into new List.
+    cout << "******bList after copying*******" << endl;
+    bList.display();
+
+    bList.bubbleSort(); // bubbleSort into ascending order.
+    cout << "*****bList after bubbleSort*****" << endl;
+    bList.display();
+
+    bList.selectSort(); // selectSort into descending order.
+    cout << "*****bList after selectSort*****" << endl;
+    bList.display();
+
+    return 0;
+
+}
+/*
+1. read in file.
+2. display aList as is.
+3. copy list into new list.
+4. bubbleSort bList (i.e. ascending order)
+5. display bList as is.
+6. selectSort bList (i.e. descending order)
+7. display bList as is.
+*/]0;faruki@ubuntu: ~/DataStructures/Lab6faruki@ubuntu:~/DataStructures/Lab6$ exit
+exit
+
+Script done on Fri 16 Aug 2013 03:22:40 PM EDT

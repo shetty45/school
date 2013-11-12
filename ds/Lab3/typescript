@@ -1,0 +1,377 @@
+Script started on Thu 04 Jul 2013 03:42:23 AM EDT
+]0;faruki@ubuntu: ~/DataStructures/Lab3faruki@ubuntu:~/DataStructures/Lab3$ cat Template.h
+/************************************************************************
+ * Name: Caleb Faruki
+ * Lab3: Template Array
+ * Course: Data Structures
+ * Date: June 19, 2013
+ * File: Template Header File
+ ************************************************************************/
+
+#ifndef TEMPLATE_H
+#define TEMPLATE_H
+
+#include <iostream>
+
+using namespace std;
+
+template <typename T>
+class Template {
+
+    friend istream & operator>>( istream & in, Template<T> & a ) {
+	   a.input();
+	   return in;
+    }
+
+    friend ostream & operator<<( ostream & out, const Template<T> & a ) {
+	   a.output();
+	   return out;
+    }
+
+public:
+
+    Template<T> ();   // Default constructor
+    Template<T> ( int );   // New constructor
+    Template<T> ( const Template<T> & );   // Copy constructor
+    ~Template<T> ();   // Destructor.
+
+    // Operator overload prototypes.
+    const Template<T> & operator=( const Template<T> & );
+    const bool operator==( const Template<T> & );
+    const bool operator!=( const Template<T> & );
+
+    T & operator[]( int );	// Left hand operator.
+    T operator[]( int ) const;	// Right hand operator.
+
+private:
+
+    // Member function prototypes
+    bool isEqual ( const Template<T> & );
+    void input();
+    void output() const;
+
+    static const int DEFAULTSIZE = 10; // Set default array size.
+    static const int MAXSIZE = 100; // Set maximum array size.
+    static T DEFAULTVALUE; // Set value of array elements.
+    int size;
+    T * ptr;
+
+};
+
+#endif
+
+template <typename T>
+T Template<T>::DEFAULTVALUE; // Instantiate DEFAULTVALUE of ADT T
+
+/****************************Constructors*****************************/
+
+// Default constructor
+template <typename T>
+Template<T>::Template() {
+
+    size = DEFAULTSIZE;
+    ptr = new T [size];     // Allocate memory for array[DEFAULTSIZE].
+
+    for (int i = 0; i < size; i++) 
+        ptr[i] = DEFAULTVALUE;  // Set all elements to DEFAULTVALUE.
+    
+}
+
+// New constructor
+template <typename T>
+Template<T>::Template( int a ) {
+
+    if (a < 1)
+        size = DEFAULTSIZE; // Can't allocate array of <= 0 elements.
+    else if (a > MAXSIZE)
+        size = MAXSIZE; // Template can be no larger than 100 elements.
+    else
+        size = a;   // Valid argument, passed to size.
+
+    ptr = new T [size];
+
+    for (int i = 0; i < size; i++) 
+        ptr[i] = DEFAULTVALUE;  // Set all elements to DEFAULTVALUE.
+    
+}
+
+// Copy constructor
+template <typename T>
+Template<T>::Template( const Template<T> & b ) { // If argument is array, copy.
+
+    size = b.size;
+    ptr = new T [size]; // Set size to argument's array size.
+
+    for (int i = 0; i < size; i++)
+        ptr[i] = b.ptr[i]; // Copy elements.
+
+}
+
+// Destructor
+template <typename T>
+Template<T>::~Template () {
+
+    for (int i = 0; i < size; i++) {
+        delete ptr; // Deallocate memory.
+        ptr = NULL; // Delete array elements.
+    }
+
+}
+
+/*************************Operator Overloads**************************/
+
+template <typename T>
+const Template<T> & Template<T>::operator=( const Template<T> & b ) {
+
+    delete ptr; // Delete original array.
+    size = b.size; // Reset size to argument's array size.
+    ptr = new T [size]; // Create new array of b's size.
+
+    for (int i = 0; i < size; i++) 
+        ptr[i] = b.ptr[i]; // Copy argument elements into new array.
+
+    return * this; // Return value of object currently being used.
+
+}
+
+template <typename T>
+const bool Template<T>::operator == ( const Template<T> & b ) { return isEqual(b); }
+
+template <typename T>
+const bool Template<T>::operator != ( const Template<T> & b ) { return isEqual(b); }
+
+// Overload [] operator for lvalue.
+template <typename T>
+T & Template<T>::operator [] ( int a ) { return ptr[a]; }
+
+// Overload [] operator for rvalue.
+template <typename T>
+T Template<T>::operator [] ( int a ) const { return ptr[a]; }
+
+/***************************Member Functions**************************/
+
+// Checks equality as subroutine of == & != operators
+template <typename T>
+bool Template<T>::isEqual ( const Template<T> & b ) {
+
+    if (size != b.size)
+        return false;   // Returns != if array sizes differ.
+
+    for (int i = 0; i < size; i++)
+        if (ptr[i] != b.ptr[i])
+            return false;   // Returns != if array contents differ.
+
+    return true;    // Else, it returns ==.
+
+}
+
+template <typename T>
+void Template<T>::input () {
+
+    for (int i = 0; i < size; i++) {
+       cout << " Value of element(" << i+1 << "/" << size << "):";
+       cin >> ptr[i];
+    }
+
+}
+
+template <typename T>
+void Template<T>::output () const {
+
+    cout << "{ ";
+
+    for (int i = 0; i < size; i++)
+        cout << ptr[i] << ' ';
+
+    cout << "}" << endl;
+
+}]0;faruki@ubuntu: ~/DataStructures/Lab3faruki@ubuntu:~/DataStructures/Lab3$ cat main.cc
+/**********************************************************************
+ * Name: Caleb Faruki
+ * Lab3: Template Array
+ * Course: Data Structures
+ * Date: July 3, 2013
+ * File: Template Main Function File
+ *********************************************************************/
+
+#include "Template.h"
+
+int main () {
+
+    int arrSize;
+    cout << "Specify size of arrays intOne & intTwo: ";
+    cin >> arrSize;
+    cout << endl;
+
+/***************************Integer Template**************************/
+
+    cout << "~~~TEMPLATE<INT>~~~\n" << endl;
+
+    Template<int> intOne(arrSize); // New constructor called for intOne
+    Template<int> intTwo(intOne); // Copy constructor called for intTwo
+    
+    // Print contents of both arrays (all elements == DEFAULTVALUE).
+    cout << "Printing contents of both arrays: " << endl 
+         << "intOne[size==" << arrSize << "]: " << intOne 
+         << "intTwo[size==" << arrSize << "]: " << intTwo;
+
+    // Show that copy constructor works.
+    if (intOne == intTwo)
+        cout << "intOne == intTwo.\n" << endl;
+    
+    // Set value of 1st element to arrSize.
+    intOne[0] = arrSize;
+    cout << "Now, intOne[0] == " << intOne[0] << endl << endl;
+    
+    // Manually set all values for arrTwo.
+    cout << "Now enter elements for intTwo." << endl;
+    cin >> intTwo;
+    cout << endl;
+    
+    // Print contents of both arrays.
+    cout << "Printing contents of both arrays:\n" << "intOne: " 
+         << intOne << "intTwo: " << intTwo;
+    
+    // Check equality of arrOne & arrTwo.
+    if (intOne == intTwo)
+        cout << "intOne == intTwo.\n" << endl;
+    else 
+        cout << "intOne != intTwo.\n" << endl;
+
+/*************************Character Template**************************/
+
+    cout << "~~~TEMPLATE<CHAR>~~~\n" << endl;
+
+    Template<char> charOne; // Default constructor called for charOne
+    // All values default set to ' '.
+
+    cout << "Now specify size of array charTwo: ";
+    cin >> arrSize;
+    cout << endl;
+
+    Template<char> charTwo(arrSize); // New constructor call
+
+    // Print contents of both arrays.
+    cout << "Printing contents of both arrays:\n" << "charOne: " 
+         << charOne << "charTwo: " << charTwo;
+    
+    // Check equality of charOne & charTwo.
+    if (charOne == charTwo)
+        cout << "charOne == charTwo.\n" << endl;
+    else 
+        cout << "charOne != charTwo.\n" << endl;
+
+    // Set value of 1st element to '%'.
+    charOne[0] = '%';
+    cout << "Now, charOne[0] == " << charOne[0] << endl << endl;
+    
+    // Manually set all values for charTwo.
+    cout << "Now enter elements for charTwo." << endl;
+    cin >> charTwo;
+    cout << endl;
+
+    cout << "Printing contents of both arrays:\n" << "charOne: " 
+         << charOne << "charTwo: " << charTwo;
+
+/**************************Double Template***************************/
+
+    cout << "\n~~~TEMPLATE<DOUBLE>~~~\n" << endl;
+
+    Template<double> dblOne;
+
+    cout << "Now specify size of array dblTwo: ";
+    cin >> arrSize;
+    cout << endl;
+
+    Template<double> dblTwo(arrSize);
+
+    cout << "Printing contents of both arrays:\n" << "dblOne: " 
+         << dblOne << "dblTwo: " << dblTwo;
+
+    if (dblOne == dblTwo)
+        cout << "dblOne == dblTwo.\n" << endl;
+    else 
+        cout << "dblOne != dblTwo.\n" << endl;
+
+    // Set value of 1st element to '%'.
+    dblOne[0] = 6.54321;
+    cout << "Now, dblOne[0] == " << dblOne[0] << endl << endl;
+    
+    cout << "Now enter elements for dblTwo." << endl;
+    cin >> dblTwo;
+    cout << endl;
+
+    cout << "Printing contents of both arrays:\n" << "dblOne: " 
+         << dblOne << "dblTwo: " << dblTwo;
+
+    return 0;
+
+}
+]0;faruki@ubuntu: ~/DataStructures/Lab3faruki@ubuntu:~/DataStructures/Lab3$ g++ main.cc
+]0;faruki@ubuntu: ~/DataStructures/Lab3faruki@ubuntu:~/DataStructures/Lab3$ ./a.out
+Specify size of arrays intOne & intTwo: 4
+
+~~~TEMPLATE<INT>~~~
+
+Printing contents of both arrays: 
+intOne[size==4]: { 0 0 0 0 }
+intTwo[size==4]: { 0 0 0 0 }
+intOne == intTwo.
+
+Now, intOne[0] == 4
+
+Now enter elements for intTwo.
+ Value of element(1/4):5
+ Value of element(2/4):4
+ Value of element(3/4):3
+ Value of element(4/4):2
+
+Printing contents of both arrays:
+intOne: { 4 0 0 0 }
+intTwo: { 5 4 3 2 }
+intOne != intTwo.
+
+~~~TEMPLATE<CHAR>~~~
+
+Now specify size of array charTwo: 4
+
+Printing contents of both arrays:
+charOne: {                     }
+charTwo: {         }
+charOne != charTwo.
+
+Now, charOne[0] == %
+
+Now enter elements for charTwo.
+ Value of element(1/4):$
+ Value of element(2/4):#
+ Value of element(3/4):@
+ Value of element(4/4):a
+
+Printing contents of both arrays:
+charOne: { %                   }
+charTwo: { $ # @ a }
+
+~~~TEMPLATE<DOUBLE>~~~
+
+Now specify size of array dblTwo: 3
+
+Printing contents of both arrays:
+dblOne: { 0 0 0 0 0 0 0 0 0 0 }
+dblTwo: { 0 0 0 }
+dblOne != dblTwo.
+
+Now, dblOne[0] == 6.54321
+
+Now enter elements for dblTwo.
+ Value of element(1/3):4.555
+ Value of element(2/3):3.14
+ Value of element(3/3):1
+
+Printing contents of both arrays:
+dblOne: { 6.54321 0 0 0 0 0 0 0 0 0 }
+dblTwo: { 4.555 3.14 1 }
+]0;faruki@ubuntu: ~/DataStructures/Lab3faruki@ubuntu:~/DataStructures/Lab3$ exit
+exit
+
+Script done on Thu 04 Jul 2013 03:43:20 AM EDT
