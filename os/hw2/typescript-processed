@@ -1,0 +1,74 @@
+Script started on Wed 09 Oct 2013 01:50:41 PM EDT
+faruki@ubuntu:~/Public/os/hw2$ cat proj1.c
+/**********************************************************************
+* Name: Caleb Faruki
+* Course: CISC3595 Operating Systems
+* Date: September 30, 2013
+* File: Bare-Bones cp Command
+**********************************************************************/
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+char buf[BUFSIZ]; /*default buffer size of 256 bytes*/
+
+int main(int argc, char** argv) {
+	int src, dest; /*the two files being worked on*/
+	int count; /*counts bytes in read file.*/
+
+	if (argc!=3) { /*<cp> <source> <destination>*/
+		printf("Error: Too few or too many arguments\n");
+		return 1;
+	}
+
+	src = open(argv[1], O_RDONLY); /*open src as read-only*/
+	if (src==-1) { /*-1: something went wrong.*/
+		printf("Error: Can't open %s\n", argv[1]);
+		return 1;
+	}
+
+	dest = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC);
+	/*O_WRONLY: write-only, O_CREAT: create file if none.
+	  O_TRUNC: reset file length to 0.*/
+	if (dest==-1) {
+		printf("Error: Can't create %s\n", argv[2]);
+		return 1;
+	}
+
+	/*while count reads bytes from src, write bytes to dest*/
+	while((count = read(src, buf, BUFSIZ)) > 0)
+		write(dest, buf, count);
+
+	close(src);		/*close file descriptor 'src'*/
+	close(dest);	/*close 'dest' file*/
+
+	return 0;
+}faruki@ubuntu:~/Public/os/hw2$ gcc -o proj1 proj1.c
+faruki@ubuntu:~/Public/os/hw2$ ls
+agw_proj1.c  OS_hw2.odt  proj1	      proj1.c  source2
+OS_hw2	     OS_hw2.pdf  proj1-agw.c  source   typescript
+faruki@ubuntu:~/Public/os/hw2$ cat source
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.faruki@ubuntu:~/Public/os/hw2$ cat source2
+We the People of the United States, in Order to form a more perfect Union, establish Justice, insure domestic Tranquility, provide for the common defence, promote the general Welfare, and secure the Blessings of Liberty to ourselves and our Posterity, do ordain and establish this Constitution for the United States of America.
+faruki@ubuntu:~/Public/os/hw2$ ./proj1
+Error: Too few or too many arguments
+faruki@ubuntu:~/Public/os/hw2$ ./proj1 idontexist destination
+Error: Can't open idontexist
+faruki@ubuntu:~/Public/os/hw2$ ./proj1 source destination
+faruki@ubuntu:~/Public/os/hw2$ ls
+agw_proj1.c  OS_hw2.odt  proj1-agw.c  source2
+destination  OS_hw2.pdf  proj1.c      typescript
+OS_hw2	     proj1	 source
+faruki@ubuntu:~/Public/os/hw2$ diff --brief source destination
+faruki@ubuntu:~/Public/os/hw2$ chmod ugo-rwx destination
+faruki@ubuntu:~/Public/os/hw2$ ./proj1 source2 destination
+Error: Can't create destination
+faruki@ubuntu:~/Public/os/hw2$ chmod ugo+rwx destination
+faruki@ubuntu:~/Public/os/hw2$ ./proj1 source2 destination
+faruki@ubuntu:~/Public/os/hw2$ diff --brief source destination
+Files source and destination differ
+faruki@ubuntu:~/Public/os/hw2$ diff ---brief source2 destination
+faruki@ubuntu:~/Public/os/hw2$ exit
+exit
+
+Script done on Wed 09 Oct 2013 01:52:49 PM EDT

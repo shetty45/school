@@ -1,0 +1,72 @@
+Script started on Mon 11 Nov 2013 10:23:34 AM EST
+]0;faruki@ubuntu: ~/Public/algo/Caleb_Faruki_CISC4080_quiz_9ecfaruki@ubuntu:~/Public/algo/Caleb_Faruki_CISC4080_quiz_9ec$ g++ -o test q9ec.cc
+]0;faruki@ubuntu: ~/Public/algo/Caleb_Faruki_CISC4080_quiz_9ecfaruki@ubuntu:~/Public/algo/Caleb_Faruki_CISC4080_quiz_9ec$ cat q9ec.cc
+/*********************************************************************
+* Author: caleb Faruki
+* Course: CISC 4080 Algorithms
+* Professor: Dr. Xiaoxu Han
+* Date: November 11, 2013
+* Description: Quiz 9 Extra Cred Modular Exponentiation Program
+*********************************************************************/
+#include <math.h>
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+int modpow(int a, int n, int m);
+
+int main() {
+	//P1
+	//a,n,m = base of exp, exp, modulo
+	int a = 2, n = 133, m = 17;
+	printf("answer: x = %d\n",modpow(a,n,m));
+	//P2
+	a = 21,	n = 72,	m = 37;
+	printf("answer: x = %d\n",modpow(a,n,m));
+
+	return 0;
+}
+
+int modpow(int a, int n, int m) { //,exp,mod
+	int R; //remainder
+	int x = 1; //answer
+
+	printf("Computing %d^%d(mod%d)...",a,n,m);
+	cout << endl;
+
+	while(n != 0) { //exponent is not 0
+		R = n % 2; //a^n%m = a^(n-R) %m * a^R %m
+		n = n/2; //decrement by n/2 until n=1
+		if(R==1)
+			x = (x*a % m);
+		a = (a*a) % m; // change a to a^2 % m
+		printf("R = %d, n = %d, a = %d",R,n,a);
+		cout << endl;
+	}
+	return x; //solve for x = a^n mod(m)
+}]0;faruki@ubuntu: ~/Public/algo/Caleb_Faruki_CISC4080_quiz_9ecfaruki@ubuntu:~/Public/algo/Caleb_Faruki_CISC4080_quiz_9ec$ 
+]0;faruki@ubuntu: ~/Public/algo/Caleb_Faruki_CISC4080_quiz_9ecfaruki@ubuntu:~/Public/algo/Caleb_Faruki_CISC4080_quiz_9ec$ ./test
+Computing 2^133(mod17)...
+R = 1, n = 66, a = 4
+R = 0, n = 33, a = 16
+R = 1, n = 16, a = 1
+R = 0, n = 8, a = 1
+R = 0, n = 4, a = 1
+R = 0, n = 2, a = 1
+R = 0, n = 1, a = 1
+R = 1, n = 0, a = 1
+answer: x = 15
+Computing 21^72(mod37)...
+R = 0, n = 36, a = 34
+R = 0, n = 18, a = 9
+R = 0, n = 9, a = 7
+R = 1, n = 4, a = 12
+R = 0, n = 2, a = 33
+R = 0, n = 1, a = 16
+R = 1, n = 0, a = 34
+answer: x = 1
+]0;faruki@ubuntu: ~/Public/algo/Caleb_Faruki_CISC4080_quiz_9ecfaruki@ubuntu:~/Public/algo/Caleb_Faruki_CISC4080_quiz_9ec$ exit
+exit
+
+Script done on Mon 11 Nov 2013 10:23:54 AM EST

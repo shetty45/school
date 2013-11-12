@@ -1,0 +1,20 @@
+1.13a. Errant/malicious users can hold up important processes by occupying system resources with frivolous/harmful processes or have access to privileged programs if permissions haven't thoroughly been established for all users. Or, users might be able to copy/steal data/programs from other system users.
+
+1.13b. No. Dedicated machines have dedicated applications whereas time-shared machines offer more flexibility. But flexibility means that a protection scheme is more difficult to implement and is more complex. 
+--------------------------------------------------------------
+1.16a. Handheld devices: Need virtual memory but not time-sharing. There is only one user and handheld hardware is typically very limited in storage size and in processing power. Must be able to run just one program efficiently (unless a smart device e.g. iPhone) even if it exceeds physical memory size. Programs for these devices are also interactive and have time constraints somewhat proportional to user input, so batch programming isn't desirable (batch systems process jobs in bulk with predetermined input).
+
+1.16b. Real-time systems: Need virtual memory and (possibly not) time-sharing. Have rigid time constraints with little-or-no user input. A program might exceed physical memory size and the OS must account for this in order to ensure that output is generated within the set time constraints. Time-sharing is a possibility but usually these systems are designed for a dedicated application.
+----------------------------------------------------------------
+1.19a. The client-server model classifies systems as either clients or servers. Clients request services and servers provide those services. Systems must be configured as either-or, not both at the same time.
+
+1.19b. The peer-to-peer model doesn't have strict roles. Each node in a P2P model functions as a node that both requests services and provides services to other peer nodes.
+----------------------------------------------------------------
+1.21a. Network computers rely on a centralized system for most of its services. Each network computer has the bare essentials for an OS to manage its own resources. Traditional PCs are self-contained systems each with an OS to manage all its resources and perform all the users desired services without relying on a centralized system.
+
+1.21b. Scenarios where network computers are advantageous typically have potentially heterogeneous computers that need access to the same information and are intended for a particular use and requires broad administration, as in a hospital, a school, or a company.
+---------------------------------------------------------------
+1.29a. A dormitory floor (LAN)
+1.29b. A university campus (LAN e.g. LC, WAN e.g. RH).
+1.29c. A state (WAN).
+1.29d. A nation (WAN).

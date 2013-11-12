@@ -1,0 +1,31 @@
+Due 9/17 Tuesday
+
+Pg 70-77 Problems #1,2,4,6,8,12,18,31
+
+Extra credit: Problems #25,29
+
+P1
+Design and describe an application-level protocol to be used between an ATM and a bank's centralized computer. 
+
+Your protocol should allow a user's card and PW to be verified, the account balance (which is maintained at the centralized computer) to be queried, and an account withdrawal to be made. 
+
+Your protocol entities should be able to handle the all-too-common case when there isn't enough money in an account for a withdrawal. 
+
+Specify your protocol by listing the messages exhanged and the action taken by the ATM or the bank's centralized computer on on transmission and receipt of messages.
+
+Sketch the operation of your protocol for the case of a simple withdrawal with no errors, using a diagram similar to Figure 1.2. Explicitly state the assumptions made by your protocol about the underlying end-to-end transport service.
+
+App-layer = where network apps and their app-layer protocols reside. HTTP, SMTP, FTP, and DNS are all examples. It's distributed over multiple end systems with the app in one end system using the protocol to exchange info packets with the app in another end system. We'll refer to this info packet at the app-layer as a message.
+
+a. Account connection request (insert card).
+b. Account connection reply (request PIN).
+a. Input PIN.
+b. Computer verifies PIN, SEND options <withdraw|deposit|view balance>
+a. GET <withdrawal|deposit|view balance>.
+b. SEND <savings|checking>.
+a. GET <savings|checking>.
+b. SEND <withdrawal/amount|deposit/amount|view balance/view>
+	"Would you like to perform another transaction? (yes/no)"
+a. SEND <yes/no>
+	If yes, iterate 2nd thru 4th exchanges.
+	If no, terminate.
