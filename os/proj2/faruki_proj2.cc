@@ -1,8 +1,9 @@
 /* ********************************************************************
- *
- *
- *
- *
+ * Name: Caleb Faruki
+ * Professor: Dr. Art Werschulz
+ * Course: CISC3595 Operating Systems
+ * Date: November 12, 2013
+ * Description: Project 2
  * ********************************************************************/
 
 #include <stdlib.h>
