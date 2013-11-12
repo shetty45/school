@@ -1,2 +1,11 @@
+# object, archive files
 *.[oa]
+
+# temp files
 *~
+# trail expression with '/' to specify directory
+
+# ignore doc/notes.txt, but not doc/server/arch.txt
+# doc/*.txt
+# ignore all .txt files in the doc/ directory
+# doc/**/*.txt
