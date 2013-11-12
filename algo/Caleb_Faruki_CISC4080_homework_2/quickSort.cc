@@ -17,7 +17,17 @@ void printArray(int a[], int size);
 void avg(int a[], int size);
 void best(int a[], int size);
 void worst(int a[], int size);
-bool isSorted(const int a[], int& size);
+
+bool isSorted(const int a[], int& size) {
+	for(int i=0; i < size-1; i++) {
+		if(a[i] > a[i+1])
+			return false;
+	}
+	for(int i=0; i < size-1; i++) {
+		if(a[i] < a[i+1])
+			return true;
+	}
+} // end isSorted()
 
 void swap(int& x, int& y) {
     int temp = x; // create temp copy of x
@@ -34,7 +44,7 @@ int choosePivot(int a[], int lo, int hi) {
 		return lo;
     else
 		return mid;
-}
+} // end choosePivot()
 
 void partition(int a[], int lo, int hi, int& pivotIndex) {
     choosePivot(a, lo, hi);
@@ -55,7 +65,7 @@ void partition(int a[], int lo, int hi, int& pivotIndex) {
     if (firstUnknown != lastS1)
 	swap(a[lo], a[lastS1]);
     pivotIndex = lastS1;
-} // partition()
+} // end partition()
 
 void quickSort(int a[], int lo, int size) {
     int pivotIndex;
@@ -69,17 +79,6 @@ void quickSort(int a[], int lo, int size) {
     	}
     }
 } // end quickSort()
-
-bool isSorted(const int a[], int& size) {
-	for(int i=0; i < size-1; i++) {
-		if(a[i] > a[i+1])
-			return false;
-	}
-	for(int i=0; i < size-1; i++) {
-		if(a[i] < a[i+1])
-			return true;
-	}
-} // end isSorted()
 
 int main() {
 	int size = pow(10,4);
@@ -114,7 +113,7 @@ int main() {
 		 << (double)time/(CLOCKS_PER_SEC/1000) << "ms\n"  << endl;
 
 	return 0;
-}
+} // end main()
 
 //for debugging purposes
 void printArray(int a[], int size) {
@@ -135,8 +134,6 @@ void best(int a[], int size) { //best-case sort
 
 void worst(int a[], int size) { //worst-case sort
 	int m = size;
-	for(int i=0; i < size; i++) {
+	for(int i=0; i < size; i++, m--)
 		a[i] = m;
-		m--;
-	}
 } // end worst()
