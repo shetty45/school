@@ -3,7 +3,7 @@
 * Professor: Dr. Xiaoxu Han
 * Course: CISC 4080 Algorithms
 * Date: November 12, 2013
-* Description: Homework 2
+* Description: Homework 2 quickSort()
 *********************************************************************/
 
 #include <iostream>
