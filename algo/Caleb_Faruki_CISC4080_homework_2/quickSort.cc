@@ -22,7 +22,7 @@ bool isSorted(const int a[], int& size) {
 	for(int i=0; i < size-1; i++) {
 		if(a[i] > a[i+1])
 			return false;
-	}
+	} // want ascending order, not descending
 	for(int i=0; i < size-1; i++) {
 		if(a[i] < a[i+1])
 			return true;

@@ -9,3 +9,6 @@
 # doc/*.txt
 # ignore all .txt files in the doc/ directory
 # doc/**/*.txt
+
+# ignore lock files
+.~lock.*
