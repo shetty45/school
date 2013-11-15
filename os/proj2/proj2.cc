@@ -8,44 +8,65 @@
 #include <cstdlib>
 #include <cstdio>
 #include <pthread.h>
+#include <iostream>
 
-void *fib_runner (void *param);
+int fibonacci(int n);
+void *fibrunner (void *param);
 
-unsigned long int *fib_array;
-int upper;
+int *array;
+int fib;
+int n; // equivalent to 'upper' in fig 4.9
 
-int main(int argc, char** argv) {
-	pthread_t tid;
+int main(int argc, char* argv[]) {
+	pthread_t tfib;
 	pthread_attr_t attr;
 
 	if(argc != 2) {
-		fprintf(stderr,"usage: fib <integer>\n");
+		fprintf(stderr,"usage: proj2 <integer>\n");
 		return 1;
 	}
-	upper = atoi(argv[1]);
-	if(upper<0 || upper>=256) {
-		fprintf(stderr,"condition not met: 0 < %d >= 255\n",upper);
+	n = atoi(argv[1]);
+	if(n<0 || n>=256) {
+		fprintf(stderr,"condition not met: 0 < %d >= 255\n",n);
 		return 2;
 	}
-
-	/* get default attributes */
 	pthread_attr_init(&attr);
-	/*create the thread */
-	pthread_create(&tid,&attr,fib_runner,argv[1]);
-	/*wait for thread to exit */
-	pthread_join(tid,NULL);
+	pthread_create(&tfib,&attr,fibrunner,NULL); // argv[1] = n
+	pthread_join(tfib,NULL); //SEG FAULT HERE!!!!
 
-	for(int i=0; i < upper; i++)
-		printf("fibs[ %d] = %d\n",i,fibarray);
+/*	std::cout << 2 << std::endl;
+	// print fib_runner results as they are computed
+	for(int i=0; i < n; i++)
+		printf("fibs[ %d] = %d\n",i,array[i]);*/
 
 	return 0;
-}
+} // end main()
 
-void *fib_runner (void *param) {
-	int i, upper = atoi(param);
-	fib = 0;
-	for (i=1; i<= upper; i++)
-		fibarray += i;
+int fibonacci(int n) {
+	int array[n+1];
+	array[0] = 0;
+	array[1] = 1;
+	for(int i=2; i <= n; i++)
+		array[i]=array[i-1]+array[i-2];
+	return array[n];
+} // end fibonacci ()
+
+void *fibrunner (void *param) {
+	for(int i=1; i < n; i++)
+		array[i] = fibonacci(i);
 
 	pthread_exit(0);
+} // end fib_runner()
+
+/*
+if(n<2)
+	return n;
+int prePrev=0, prev=1, result=0;
+
+for(int i=2; i<=n; i++) {
+	sum = prePrev + prev;
+	prePrev = prev;
+	prev = sum;
 }
+return sum;
+*/
