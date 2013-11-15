@@ -1,0 +1,116 @@
+Script started on Thu 14 Nov 2013 08:56:19 PM EST
+]0;faruki@ubuntu: ~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2faruki@ubuntu:~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2$ g++ -o  gcd GCD.cc
+]0;faruki@ubuntu: ~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2faruki@ubuntu:~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2$ cat GCD .cc
+/*********************************************************************
+* Name: Caleb Faruki
+* Professor: Dr. Xiaoxu Han
+* Course: CISC 4080 Algorithms
+* Date: November 14, 2013
+* Description: Homework 2 Recursive Euclidean Algorithm
+*********************************************************************/
+#include <cstdlib>
+#include <cstdio>
+
+using namespace std;
+
+int compute_gcd(int a, int b) {
+	printf("\nComputing GCD for %d|%d",a,b);
+	if(a%b == 0)
+		return b; //clean division
+	return compute_gcd(b, a%b);
+} // end compute_gcd()
+
+int main(int argc, char** argv) {
+	int a, b, gcd = 0;
+	if (argc!=3) {
+		printf("Error: Too few or too many arguments\n"
+			   "Please type './gcd <dividend> <divisor> to compute GCD(a,b)'");
+		return 1;
+	}
+	a = atoi(argv[1]);
+	b = atoi(argv[2]);
+	if(a<b) { // swap a & b
+		int temp = a;
+		a = b;
+    	b = temp;
+	}
+	printf("\nResults: GCD( %d, %d ) = %d\n\n",a,b,compute_gcd(a,b));
+	return 0;
+} // end main()]0;faruki@ubuntu: ~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2faruki@ubuntu:~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2$ 
+]0;faruki@ubuntu: ~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2faruki@ubuntu:~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2$ ./gcd 4 82 1180
+
+Computing GCD for 1180|482
+Computing GCD for 482|216
+Computing GCD for 216|50
+Computing GCD for 50|16
+Computing GCD for 16|2
+Results: GCD( 1180, 482 ) = 2
+
+]0;faruki@ubuntu: ~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2faruki@ubuntu:~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2$ ./gcd 8 756 23485
+
+Computing GCD for 23485|8756
+Computing GCD for 8756|5973
+Computing GCD for 5973|2783
+Computing GCD for 2783|407
+Computing GCD for 407|341
+Computing GCD for 341|66
+Computing GCD for 66|11
+Results: GCD( 23485, 8756 ) = 11
+
+]0;faruki@ubuntu: ~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2faruki@ubuntu:~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2$ ./gcd 8 7561 23485
+
+Computing GCD for 87561|23485
+Computing GCD for 23485|17106
+Computing GCD for 17106|6379
+Computing GCD for 6379|4348
+Computing GCD for 4348|2031
+Computing GCD for 2031|286
+Computing GCD for 286|29
+Computing GCD for 29|25
+Computing GCD for 25|4
+Computing GCD for 4|1
+Results: GCD( 87561, 23485 ) = 1
+
+]0;faruki@ubuntu: ~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2faruki@ubuntu:~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2$ 1234567 [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K./gcd 1 234567 2008479
+
+Computing GCD for 2008479|1234567
+Computing GCD for 1234567|773912
+Computing GCD for 773912|460655
+Computing GCD for 460655|313257
+Computing GCD for 313257|147398
+Computing GCD for 147398|18461
+Computing GCD for 18461|18171
+Computing GCD for 18171|290
+Computing GCD for 290|191
+Computing GCD for 191|99
+Computing GCD for 99|92
+Computing GCD for 92|7
+Computing GCD for 7|1
+Results: GCD( 2008479, 1234567 ) = 1
+
+]0;faruki@ubuntu: ~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2faruki@ubuntu:~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2$ ./gcd 5 78129810 20092330
+
+Computing GCD for 578129810|20092330
+Computing GCD for 20092330|15544570
+Computing GCD for 15544570|4547760
+Computing GCD for 4547760|1901290
+Computing GCD for 1901290|745180
+Computing GCD for 745180|410930
+Computing GCD for 410930|334250
+Computing GCD for 334250|76680
+Computing GCD for 76680|27530
+Computing GCD for 27530|21620
+Computing GCD for 21620|5910
+Computing GCD for 5910|3890
+Computing GCD for 3890|2020
+Computing GCD for 2020|1870
+Computing GCD for 1870|150
+Computing GCD for 150|70
+Computing GCD for 70|10
+Results: GCD( 578129810, 20092330 ) = 10
+
+]0;faruki@ubuntu: ~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2faruki@ubuntu:~/Public/school.git/algo/Caleb_Faruki_CISC4080_homework_2$ exit
+exit
+
+Script done on Thu 14 Nov 2013 08:59:36 PM EST

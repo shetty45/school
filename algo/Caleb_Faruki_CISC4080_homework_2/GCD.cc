@@ -5,10 +5,8 @@
 * Date: November 14, 2013
 * Description: Homework 2 Recursive Euclidean Algorithm
 *********************************************************************/
-#include <iostream>
 #include <cstdlib>
 #include <cstdio>
-#include <cmath>
 
 using namespace std;
 
@@ -23,7 +21,7 @@ int main(int argc, char** argv) {
 	int a, b, gcd = 0;
 	if (argc!=3) {
 		printf("Error: Too few or too many arguments\n"
-			   "Please type './gcd <dividend> <> to compute GCD(a,b)'");
+			   "Please type './gcd <dividend> <divisor> to compute GCD(a,b)'");
 		return 1;
 	}
 	a = atoi(argv[1]);
