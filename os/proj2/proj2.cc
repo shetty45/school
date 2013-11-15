@@ -30,14 +30,18 @@ int main(int argc, char* argv[]) {
 		fprintf(stderr,"condition not met: 0 < %d >= 255\n",n);
 		return 2;
 	}
+
+	    /* allocate memory for array to size of input + 1 */
+    array = (int*) malloc((n + 1)*sizeof(int));
+
 	pthread_attr_init(&attr);
 	pthread_create(&tfib,&attr,fibrunner,NULL); // argv[1] = n
 	pthread_join(tfib,NULL); //SEG FAULT HERE!!!!
 
-/*	std::cout << 2 << std::endl;
+	std::cout << 2 << std::endl;
 	// print fib_runner results as they are computed
 	for(int i=0; i < n; i++)
-		printf("fibs[ %d] = %d\n",i,array[i]);*/
+		printf("fibs[ %d] = %d\n",i,array[i]);
 
 	return 0;
 } // end main()
