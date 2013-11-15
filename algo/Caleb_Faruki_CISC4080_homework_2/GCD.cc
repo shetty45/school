@@ -3,9 +3,8 @@
 * Professor: Dr. Xiaoxu Han
 * Course: CISC 4080 Algorithms
 * Date: November 14, 2013
-* Description: Homework 2 GCD()
+* Description: Homework 2 Recursive Euclidean Algorithm
 *********************************************************************/
-
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
@@ -21,10 +20,10 @@ int compute_gcd(int a, int b) {
 } // end compute_gcd()
 
 int main(int argc, char** argv) {
-	int a, b, gcd =0;
-	if (argc!=3) { /*<gcd> <a> <b>*/
-		cout << "Error: Too few or too many arguments\n"
-			 << "Please type './gcd <a> <b> to compute GCD(a,b)'" << endl;
+	int a, b, gcd = 0;
+	if (argc!=3) {
+		printf("Error: Too few or too many arguments\n"
+			   "Please type './gcd <dividend> <> to compute GCD(a,b)'");
 		return 1;
 	}
 	a = atoi(argv[1]);
