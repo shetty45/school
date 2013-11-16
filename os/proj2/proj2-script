@@ -1,0 +1,43 @@
+Script started on Fri 15 Nov 2013 03:21:49 PM EST
+faruki@proj2: g++ -Wall proj2 proj2.cc -lpthread
+proj2: In function `_start':
+(.text+0x0): multiple definition of `_start'
+/usr/lib/gcc/i686-linux-gnu/4.6/../../../i386-linux-gnu/crt1.o:(.text+0x0): first defined here
+proj2:(.rodata+0x0): multiple definition of `_fp_hw'
+/usr/lib/gcc/i686-linux-gnu/4.6/../../../i386-linux-gnu/crt1.o:(.rodata+0x0): first defined here
+proj2: In function `_fini':
+(.fini+0x0): multiple definition of `_fini'
+/usr/lib/gcc/i686-linux-gnu/4.6/../../../i386-linux-gnu/crti.o:(.fini+0x0): first defined here
+proj2:(.rodata+0x4): multiple definition of `_IO_stdin_used'
+/usr/lib/gcc/i686-linux-gnu/4.6/../../../i386-linux-gnu/crt1.o:(.rodata.cst4+0x0): first defined here
+proj2: In function `__data_start':
+(.data+0x0): multiple definition of `__data_start'
+/usr/lib/gcc/i686-linux-gnu/4.6/../../../i386-linux-gnu/crt1.o:(.data+0x0): first defined here
+proj2: In function `__data_start':
+(.data+0x4): multiple definition of `__dso_handle'
+/usr/lib/gcc/i686-linux-gnu/4.6/crtbegin.o:(.data+0x0): first defined here
+proj2: In function `_init':
+(.init+0x0): multiple definition of `_init'
+/usr/lib/gcc/i686-linux-gnu/4.6/../../../i386-linux-gnu/crti.o:(.init+0x0): first defined here
+/tmp/ccVJKiGh.o:(.bss+0x0): multiple definition of `fiba'
+proj2:(.bss+0xc): first defined here
+/tmp/ccVJKiGh.o:(.bss+0x4): multiple definition of `n'
+proj2:(.bss+0x10): first defined here
+/tmp/ccVJKiGh.o: In function `main':
+proj2.cc:(.text+0x0): multiple definition of `main'
+proj2:(.text+0xb4): first defined here
+/tmp/ccVJKiGh.o: In function `fibrun(void*)':
+proj2.cc:(.text+0x197): multiple definition of `fibrun(void*)'
+proj2:(.text+0x24b): first defined here
+/tmp/ccVJKiGh.o: In function `fibonacci(int)':
+proj2.cc:(.text+0x15f): multiple definition of `fibonacci(int)'
+proj2:(.text+0x213): first defined here
+/usr/lib/gcc/i686-linux-gnu/4.6/crtend.o:(.dtors+0x0): multiple definition of `__DTOR_END__'
+proj2:(.dtors+0x4): first defined here
+/usr/bin/ld: error in proj2(.eh_frame); no .eh_frame_hdr table will be created.
+collect2: ld returned 1 exit status
+faruki@proj2: ^C
+faruki@proj2: [H[2Jfaruki@proj2: exit
+exit
+
+Script done on Fri 15 Nov 2013 03:22:11 PM EST

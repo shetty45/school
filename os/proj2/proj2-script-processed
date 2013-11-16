@@ -1,3 +1,6 @@
+Script started on Fri 15 Nov 2013 02:58:59 PM EST
+faruki@proj2: g++ -o proj2 proj2.cc -pthread
+faruki@proj2: cat proj2.cc
 /*********************************************************************
 * Name: Caleb Faruki
 * Professor: Dr. Art Werschulz
@@ -45,7 +48,7 @@ int main(int argc, char* argv[]) {
 unsigned long int fibonacci(int n) {
 	if(n<2)
 		return n;
-	else 
+	else
 		return fibonacci(n-1)+fibonacci(n-2);
 } // end fibonacci ()
 
@@ -58,6 +61,63 @@ void *fibrun (void *param) {
 } // end fib_runner()
 
 /*********************************************************************
-* This program is written on a Linux 32-bit platform with 6GB RAM. 
+* This program is written on a Linux 32-bit platform with 6GB RAM.
 * Input exceeding n=47 will likely overflow and takes forever.
-*********************************************************************/
+*********************************************************************/faruki@proj2:
+faruki@proj2: ./proj2 -1
+condition not met: 0 < -1 >= 47
+faruki@proj2: ./proj2 48
+condition not met: 0 < 48 >= 47
+faruki@proj2: ./proj2 47
+fibs[ 0] = 0
+fibs[ 1] = 1
+fibs[ 2] = 1
+fibs[ 3] = 2
+fibs[ 4] = 3
+fibs[ 5] = 5
+fibs[ 6] = 8
+fibs[ 7] = 13
+fibs[ 8] = 21
+fibs[ 9] = 34
+fibs[ 10] = 55
+fibs[ 11] = 89
+fibs[ 12] = 144
+fibs[ 13] = 233
+fibs[ 14] = 377
+fibs[ 15] = 610
+fibs[ 16] = 987
+fibs[ 17] = 1597
+fibs[ 18] = 2584
+fibs[ 19] = 4181
+fibs[ 20] = 6765
+fibs[ 21] = 10946
+fibs[ 22] = 17711
+fibs[ 23] = 28657
+fibs[ 24] = 46368
+fibs[ 25] = 75025
+fibs[ 26] = 121393
+fibs[ 27] = 196418
+fibs[ 28] = 317811
+fibs[ 29] = 514229
+fibs[ 30] = 832040
+fibs[ 31] = 1346269
+fibs[ 32] = 2178309
+fibs[ 33] = 3524578
+fibs[ 34] = 5702887
+fibs[ 35] = 9227465
+fibs[ 36] = 14930352
+fibs[ 37] = 24157817
+fibs[ 38] = 39088169
+fibs[ 39] = 63245986
+fibs[ 40] = 102334155
+fibs[ 41] = 165580141
+fibs[ 42] = 267914296
+fibs[ 43] = 433494437
+fibs[ 44] = 701408733
+fibs[ 45] = 1134903170
+fibs[ 46] = 1836311903
+fibs[ 47] = 2971215073
+faruki@proj2: exit
+exit
+
+Script done on Fri 15 Nov 2013 03:01:20 PM EST
