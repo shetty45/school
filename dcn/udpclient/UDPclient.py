@@ -7,7 +7,7 @@ MESSAGE = "ping"
 
 print "UDP target IP: ", UDP_IP
 print "UDP target port: ", RPORT
-print "message sent: ", MESSAGE
+print "Message sent: ", MESSAGE
 
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
@@ -16,14 +16,14 @@ while True:
 	try:
 		if(i<10):
 			client.sendto(MESSAGE.encode('utf_8'),(UDP_IP, RPORT))
-			print "sending message: ", MESSAGE
+			print "Sending message: ", MESSAGE
 			print i
 			i=i+1
 			client.settimeout(1)
 
 			data, addr = client.recvfrom(1024)
-			print "received echo: ", data
-			print "received at: ", addr
+			print "Echo received: ", data
+			print "Received at: ", addr
 
 	finally:
 		print "Closing socket..."

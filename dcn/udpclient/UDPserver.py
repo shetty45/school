@@ -14,13 +14,12 @@ while True:
 	message, address = serverSocket.recvfrom(1024)
 	# Capitalize the message from the client
 	message = message.upper()
-	print "received message: ", message
-	print "echo to address: ", address
+	print "Received message: ", message
 	print rand
 	# If rand is less is than 4,
 	# we consider the packet lost and do not respond
 	if rand < 4:
 		continue
-	print "Back to sender: ", message
+	print "Echoing: ", message
 	# Otherwise, the server responds
 	serverSocket.sendto(message, address)
