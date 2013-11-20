@@ -1,3 +1,15 @@
+Script started on Tue 19 Nov 2013 07:59:34 PM EST
+faruki@Caleb_Faruki_CISC4080_homework_4: g++ -o prime naivePrime.cc
+faruki@Caleb_Faruki_CISC4080_homework_4: ./prime
+107 is prime.
+1187 is prime.
+2312 is NOT prime!
+7091 is NOT prime!
+95171 is NOT prime!
+177111 is NOT prime!
+8992231 is prime.
+20131107 is NOT prime!
+faruki@Caleb_Faruki_CISC4080_homework_4: cat naivePrime.cc
 #include <stdint.h>
 #include <stdio.h>
 #include <math.h>
@@ -55,3 +67,7 @@ void print(bool prime, uint64_t n)
 	else
 		printf("%llu is NOT prime!\n",n);
 }
+faruki@Caleb_Faruki_CISC4080_homework_4: exit
+exit
+
+Script done on Tue 19 Nov 2013 08:00:02 PM EST
