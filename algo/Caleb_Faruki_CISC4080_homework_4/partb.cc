@@ -138,8 +138,6 @@ void encrypt(mpz_t c[], mpz_t m[], const int size,
 		mpz_powm(c[i],m[i],e,n);
 		mpz_clear(m[i]);
 	} /* c = m^e(mod n) */
-//	printf("\n***** c *****\n");
-//	gmp_printf("    %Zd\n",c);
 }
 
 void decrypt(mpz_t m2[], mpz_t c[], const int size, 
@@ -151,7 +149,4 @@ void decrypt(mpz_t m2[], mpz_t c[], const int size,
 		mpz_powm(m2[i],c[i],d,n);
 		mpz_clear(c[i]);
 	} /* m = c ^ d (mod n) */
-
-	printf("\n***** m2 *****\n");
-	gmp_printf("    %Zd\n",m2);
 }
