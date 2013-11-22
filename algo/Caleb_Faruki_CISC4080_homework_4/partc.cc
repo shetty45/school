@@ -102,12 +102,12 @@ void generate_pq(mpz_t& p, mpz_t& q)
 
 	printf("\nGenerating keys...\n");
 	do {
-		mpz_urandomb(p,rstate,1024);
+		mpz_urandomb(p,rstate,32);
 	} while(!isPrime(p));
 	printf("\n***** p *****\n");
 	gmp_printf("    %Zd\n",p);
 	do {
-		mpz_urandomb(q,rstate,1024);
+		mpz_urandomb(q,rstate,32);
 	} while(!isPrime(q));
 	gmp_randclear(rstate);
 	
