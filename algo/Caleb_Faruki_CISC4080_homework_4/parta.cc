@@ -48,6 +48,22 @@ bool isPrime(uint64_t n)
 	return true;
 }
 
+long powmod(uint64_t a, uint64_t exp, uint64_t n)
+{
+  long long int b=1;
+  while (exp) {
+   	if (exp%2==0) {
+      	exp/=2;
+      	a = (a*a)%n;
+     	}
+    	else {
+      	exp--;
+      	b = (b*a)%n;
+      }
+  }
+  return b;
+}
+
 void print(bool prime, uint64_t n) 
 {
 	if(prime)

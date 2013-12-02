@@ -1,15 +1,6 @@
-Script started on Tue 19 Nov 2013 07:59:34 PM EST
-faruki@Caleb_Faruki_CISC4080_homework_4: g++ -o prime naivePrime.cc
-faruki@Caleb_Faruki_CISC4080_homework_4: ./prime
-107 is prime.
-1187 is prime.
-2312 is NOT prime!
-7091 is NOT prime!
-95171 is NOT prime!
-177111 is NOT prime!
-8992231 is prime.
-20131107 is NOT prime!
-faruki@Caleb_Faruki_CISC4080_homework_4: cat naivePrime.cc
+Script started on Mon 02 Dec 2013 03:04:43 AM EST
+faruki@Caleb_Faruki_CISC4080_homework_4: g++ -o parta parta.cc
+faruki@Caleb_Faruki_CISC4080_homework_4: cat parta.cc
 #include <stdint.h>
 #include <stdio.h>
 #include <math.h>
@@ -19,7 +10,7 @@ using namespace std;
 bool isPrime(uint64_t n); //naive primality test
 void print(bool prime, uint64_t n); //print primality
 
-int main () 
+int main ()
 {
 	uint64_t a=107,
 					 b=1187,
@@ -40,7 +31,7 @@ int main ()
 	return 0;
 }
 
-bool isPrime(uint64_t n) 
+bool isPrime(uint64_t n)
 {
 	//waste of time
 	if(n < 4) {
@@ -60,14 +51,39 @@ bool isPrime(uint64_t n)
 	return true;
 }
 
-void print(bool prime, uint64_t n) 
+long powmod(uint64_t a, uint64_t exp, uint64_t n)
+{
+  long long int b=1;
+  while (exp) {
+	if (exp%2==0) {
+	exp/=2;
+	a = (a*a)%n;
+	}
+	else {
+	exp--;
+	b = (b*a)%n;
+      }
+  }
+  return b;
+}
+
+void print(bool prime, uint64_t n)
 {
 	if(prime)
 		printf("%llu is prime.\n",n);
 	else
 		printf("%llu is NOT prime!\n",n);
 }
+faruki@Caleb_Faruki_CISC4080_homework_4: ./parta
+107 is prime.
+1187 is prime.
+2312 is NOT prime!
+7091 is NOT prime!
+95171 is NOT prime!
+177111 is NOT prime!
+8992231 is prime.
+20131107 is NOT prime!
 faruki@Caleb_Faruki_CISC4080_homework_4: exit
 exit
 
-Script done on Tue 19 Nov 2013 08:00:02 PM EST
+Script done on Mon 02 Dec 2013 03:05:01 AM EST
